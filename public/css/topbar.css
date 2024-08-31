@@ -4,6 +4,14 @@
     display: flex;
     font-family: 'Josefin Sans', sans-serif;
     background-color: rgb(255, 255, 255);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.topbar .wrapper{
+    display: flex;
+    width: 100%;
+    max-width: 1366px;
 }
 
 .topbar .left, .topbar .right {
