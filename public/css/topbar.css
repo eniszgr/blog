@@ -7,13 +7,13 @@
     flex-wrap: wrap;
     justify-content: center;
 }
-
+    /* just arrange max widht  */
 .topbar .wrapper{
     display: flex;
     width: 100%;
     max-width: 1366px;
 }
-
+/* total flex is 12, you can use % */
 .topbar .left, .topbar .right {
     flex: 3;
     height: 100%;
@@ -32,12 +32,15 @@
     align-items: center;
     justify-content: space-evenly;
 }
+
+/* profile picture */
 .topbar .right span img{
     width: 40px;
     height: 40px;
     border-radius: 50%;
 }
 
+/* search button */
 .topbar .right .searchEngine{
    height: 100%;
    width: 70%;
@@ -47,6 +50,7 @@
    position: relative;
 }
 
+/* icons */
 .topbar .right .searchEngine i{
     right: 0px;
     position: absolute;
@@ -72,7 +76,7 @@
  }
 
 
-
+ /* search button animation */
  .topbar .right .searchEngine{
    width: 0px;
    transition:all 0.5s;
@@ -83,3 +87,47 @@
   .topbar .right .searchEngine.active input{
     opacity: 1;
  }
+
+ /* Scroll animation */
+
+.topbar .wrapper{
+ opacity: 0;
+ transition:all 0.5s;
+ transform: translateY(-10px);
+}
+
+.topbar .wrapper.active{
+    opacity: 1;
+    transform: translateY(0px);
+} 
+
+.topbar .left i{
+    transition: all 0.3s;
+    transform: translatex(-10px);
+    opacity: 0;
+}
+.topbar .wrapper.active .left i{
+    transition: all 0.3s;
+    transform: translatex(0px);
+    opacity: 1;
+}
+.topbar .wrapper.active .left i:nth-child(2){
+ transition-duration: 0.5s;
+}
+.topbar .wrapper.active .left i:nth-child(3){
+  transition-duration: 0.8s;
+}
+.topbar .wrapper.active .left i:nth-child(4){
+   transition-duration: 1.1s;
+}
+
+.topbar .center, .topbar .right{
+    transform:translateX(-10px) translateY(-10px);
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.topbar .wrapper.active .center, .topbar .wrapper.active  .right{
+    transform:translateX(0px) translateY(0px);
+    opacity: 1;
+}
