@@ -57,3 +57,15 @@
     font-family: 'Josefin Sans', sans-serif;
     background-color: rgba(0, 0, 0, 0.08);
 }
+
+
+/* scroll animation */
+
+.sidebar .area{
+    opacity: 0;
+    transition: all 0.9s;
+}
+
+.sidebar .area.active{
+    opacity: 1;
+}
