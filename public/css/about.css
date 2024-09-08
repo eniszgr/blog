@@ -1,0 +1,97 @@
+.about{
+    padding: 0px 20px;
+}
+.about .wrapper{
+    width: 100%;
+    margin: 50px auto;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    max-width: 1366px;
+    display: flex;
+    padding: 10px;
+}
+.about .wrapper:nth-child(2n){
+   flex-direction: row-reverse;
+}
+
+.about .wrapper .text{
+    flex: 1;
+    padding: 10px;
+}
+.about .wrapper .text h1{
+    flex: 1;
+    font-family: 'Dancing Script', cursive;
+}
+.about .wrapper .text p{
+    flex: 1;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.2rem;
+    line-height: 25px;
+}
+.about .wrapper .text p::first-letter{
+    margin-left: 20px;
+}
+.about .wrapper .photo{
+    flex: 1;
+    overflow: hidden;
+}
+.about .wrapper .photo img{
+    cursor: pointer;
+    transition: all 0.5s;
+    border-radius: 10px;
+}
+.about .wrapper .photo img:hover{
+    cursor: pointer;
+    transition: all 0.5s;
+    border-radius: 10px;
+    transform: scale(1.1);
+}
+
+/* scroll animation */
+
+.about .wrapper{
+    opacity: 0;
+    transition:all 0.5s;
+}
+
+.about .wrapper.active{
+    opacity: 1;
+}
+
+.about .wrapper .text{
+    transform: translateX(-20px);
+    transition: all 0.5s;
+}
+
+.about .wrapper.active .text{
+    transform: translateX(0px);
+}
+
+.about .wrapper:nth-child(2n) .text{
+    transform: translateX(20px);
+    transition: all 0.5s;
+}
+.about .wrapper:nth-child(2n).active .text{
+    transform: translateX(0px);
+}
+.about .wrapper .photo{
+    transform: translateX(20px);
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.about .wrapper.active .photo{
+    transform: translateX(0px);
+    opacity: 1;
+}
+
+.about .wrapper:nth-child(2n) .photo{
+    transform: translateX(-20px);
+    opacity: 0;
+    transition: all 0.5s;
+}
+.about .wrapper:nth-child(2n).active .photo{
+    transform: translateX(0px);
+    opacity: 1;
+
+}
