@@ -1,0 +1,21 @@
+.error{
+    width: 100%;
+    height: calc(100vh - 50px);
+    background-color: rgb(241, 236, 226);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.error i{
+    position: absolute;
+    font-size: 20rem;
+    color:rgb(205, 16, 16,0.3) ;
+    z-index: 5;
+}
+.error span{
+    font-size: 5rem;
+    z-index: 10;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+}
