@@ -39,30 +39,26 @@ app.use(expressSession({
 }))
 app.use(express.static(path.join(__dirname, 'public')))
 
+//* Router def
 
-app.get('/', (req,res)=>{
-    res.render('site/index',{
-        source:'home.jpg',
-        title:'My Blog',
-        description:`It's a Dream`
-    })
+const indexPage= require(path.join(__dirname,'router','indexPage.js'))
+const aboutPage= require(path.join(__dirname,'router','aboutPage.js'))
+const addPage= require(path.join(__dirname,'router','addPage.js'))
+const loginPage= require(path.join(__dirname,'router','loginPage.js'))
+const registerPage= require(path.join(__dirname,'router','registerPage.js'))
+const errorPage= require(path.join(__dirname,'router','errorPage.js'))
+
+//* Router Usage
+app.use('/', indexPage);         // Ana sayfa için
+app.use('/about', aboutPage);    // Hakkında sayfası için
+app.use('/add', addPage);        // Ekleme sayfası için
+app.use('/login', loginPage);    // Giriş sayfası için
+app.use('/register', registerPage); // Kayıt sayfası için
+
+app.use('*',(req,res,next)=>{
+    res.render('site/error')
 })
-app.get('/about', (req,res)=>{
-    res.render('site/about',{
-        source:'about.jpg',
-        title:'Why U.S',
-        description:`We Are a Family`
-    })
-})
-app.get('/login', (req,res)=>{
-    res.render('site/login')
-})
-app.get('/register', (req,res)=>{
-    res.render('site/register')
-})
-app.get('/add', (req,res)=>{
-    res.render('site/add')
-})
+
 
 
 
