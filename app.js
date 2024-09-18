@@ -6,7 +6,7 @@ const dotenv = require('dotenv') //keep secret info (URL)
 const path = require('path')    //import path module                    /*require is pulling from module which include variable */
 const dbs= require(path.join(__dirname,'dbs.js'))      // "__dirname" is referance folder name for dbs.js
 const crypto = require('crypto')
-console.log(crypto.randomBytes(64).toString('hex'))
+//console.log(crypto.randomBytes(64).toString('hex'))
 
 //db connect
 dbs()
