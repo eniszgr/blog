@@ -47,6 +47,21 @@ const addPage= require(path.join(__dirname,'router','addPage.js'))
 const loginPage= require(path.join(__dirname,'router','loginPage.js'))
 const registerPage= require(path.join(__dirname,'router','registerPage.js'))
 const errorPage= require(path.join(__dirname,'router','errorPage.js'))
+const logoutPage= require(path.join(__dirname,'router','logoutPage.js'))
+
+//control identify
+app.use('/',(req,res,next)=>{
+    const{userID}=req.session
+    if(userID){
+        res.locals.user=true
+    }else{
+        res.locals.user=false
+    }
+    next()
+})
+
+
+
 
 //* Router Usage
 app.use('/', indexPage);         // Ana sayfa için
@@ -54,6 +69,7 @@ app.use('/about', aboutPage);    // Hakkında sayfası için
 app.use('/add', addPage);        // Ekleme sayfası için
 app.use('/login', loginPage);    // Giriş sayfası için
 app.use('/register', registerPage); // Kayıt sayfası için
+app.use('/logout', logoutPage); // Kayıt sayfası için
 
 app.use('*',(req,res,next)=>{
     res.render('site/error')

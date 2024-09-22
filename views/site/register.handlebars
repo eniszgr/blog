@@ -19,10 +19,21 @@
                 <button>Register</button>
             </div>
         </form> 
+        <div class="message">
+            <p id="registerMessage"></p>
+        </div>
     </div>
 <script>
     const register = document.getElementById('register')
+    const registerMessage = document.getElementById('registerMessage')
     
+    const clearMessageForRegister=()=>{
+        setTimeout(()=>{
+            registerMessage.innerHTML=''
+        },1000*4)
+    }
+
+
     register.addEventListener('submit',(e)=>{
         e.preventDefault()
 
@@ -31,7 +42,20 @@
             method:'post',
             body:formData
         }).then(response=>response.json())
-        .then(res=>{console.log(res)})
+        .then(res=>{
+            if(res.case){
+                registerMessage.style.color='green';
+                registerMessage.innerHTML=res.message
+                setTimeout(()=>{
+                    window.location.href='/'
+                },100*2)
+            }
+            else{
+                registerMessage.style.color='red';
+                registerMessage.innerHTML=res.message
+                clearMessageForRegister()
+            }
+        })
         
     })
 </script>
