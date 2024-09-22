@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { join } = require("path");
-const User = require(join(__dirname, "..", "model", "userModal.js"));
+const User = require(join(__dirname, "..", "model", "userModel.js"));
 
 router.get("/", (req, res) => {
   if (res.locals.user) {

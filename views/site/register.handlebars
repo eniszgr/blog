@@ -44,14 +44,14 @@
         }).then(response=>response.json())
         .then(res=>{
             if(res.case){
-                registerMessage.style.color='green';
+                registerMessage.style.color='#A5DD9B';
                 registerMessage.innerHTML=res.message
                 setTimeout(()=>{
                     window.location.href='/'
                 },100*2)
             }
             else{
-                registerMessage.style.color='red';
+                registerMessage.style.color='#FFCAD4';
                 registerMessage.innerHTML=res.message
                 clearMessageForRegister()
             }
