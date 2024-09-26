@@ -52,6 +52,7 @@ const logoutPage= require(path.join(__dirname,'router','logoutPage.js'))
 //control identify
 app.use('/',(req,res,next)=>{
     const{userID}=req.session
+    req.session.userID='66eb030698b0d6068bd7a759'
     if(userID){
         res.locals.user=true
     }else{
@@ -69,7 +70,7 @@ app.use('/about', aboutPage);    // Hakkında sayfası için
 app.use('/add', addPage);        // Ekleme sayfası için
 app.use('/login', loginPage);    // Giriş sayfası için
 app.use('/register', registerPage); // Kayıt sayfası için
-app.use('/logout', logoutPage); // Kayıt sayfası için
+app.use('/logout', logoutPage); 
 
 app.use('*',(req,res,next)=>{
     res.render('site/error')
