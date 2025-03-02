@@ -3,41 +3,20 @@
 <div class="home">
     <div class="wrapper">
         <div class="posts">
+            
+{{#each allData}}
             <div class="post target">
-                <h1>Title</h1>
-                <img src="/img/background/content-1.jpg" alt="">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime, esse, in explicabo quisquam quasi ea id beatae ut fuga voluptatum mollitia alias qui veniam. Magni, magnam facilis. Magnam, mollitia iure!
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae sit sapiente officiis laborum, temporibus officia voluptates et! Dolor accusantium, cumque consequatur labore eius inventore quae, rem placeat quia nesciunt magni.
+                <h1>{{title}}</h1>
+                <img src={{path}} alt="">
+                <p>{{content}}
                 </p>
                 <div class="authorAndDate">
-                    <span>Enis Özgür</span>
-                    <span>01.09.2024</span>
+                    <span>{{name}}</span>
+                    <span>{{date}}</span>
                 </div>
             </div>
+{{/each}}
 
-            <div class="post target">
-                <h1>Title</h1>
-                <img src="/img/background/content-1.jpg" alt="">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime, esse, in explicabo quisquam quasi ea id beatae ut fuga voluptatum mollitia alias qui veniam. Magni, magnam facilis. Magnam, mollitia iure!
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae sit sapiente officiis laborum, temporibus officia voluptates et! Dolor accusantium, cumque consequatur labore eius inventore quae, rem placeat quia nesciunt magni.
-                </p>
-                <div class="authorAndDate">
-                    <span>Enis Özgür</span>
-                    <span>01.09.2024</span>
-                </div>
-            </div>
-
-            <div class="post target">
-                <h1>Title</h1>
-                <img src="/img/background/content-1.jpg" alt="">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime, esse, in explicabo quisquam quasi ea id beatae ut fuga voluptatum mollitia alias qui veniam. Magni, magnam facilis. Magnam, mollitia iure!
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae sit sapiente officiis laborum, temporibus officia voluptates et! Dolor accusantium, cumque consequatur labore eius inventore quae, rem placeat quia nesciunt magni.
-                </p>
-                <div class="authorAndDate">
-                    <span>Enis Özgür</span>
-                    <span>01.09.2024</span>
-                </div>
-            </div>
         </div>
 
         <div class="sidebar">

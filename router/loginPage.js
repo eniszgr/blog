@@ -5,7 +5,7 @@ const User = require(join(__dirname, "..", "model", "userModel.js"));
 
 router.get('/', (req, res) => {
     if(res.locals.user){
-        return res.redirect('/error')
+        return res.redirect('/error')   //if user is already login, it will redirect to error page
     }
     res.render('site/login');
 });

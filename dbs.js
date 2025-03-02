@@ -11,4 +11,5 @@ const conn = ()=>{
         console.log(err)
     })
 }
-module.exports=conn
+//do it for export
+module.exports=conn 

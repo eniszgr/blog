@@ -35,7 +35,7 @@
 
 
     register.addEventListener('submit',(e)=>{
-        e.preventDefault()
+        e.preventDefault()    //block redirecting
 
         const formData= new FormData(e.target)
         fetch('/register',{
@@ -48,7 +48,7 @@
                 registerMessage.innerHTML=res.message
                 setTimeout(()=>{
                     window.location.href='/'
-                },100*2)
+                },1000*2)
             }
             else{
                 registerMessage.style.color='#FFCAD4';

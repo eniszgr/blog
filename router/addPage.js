@@ -3,6 +3,13 @@ const router = express.Router();
 const {join}=require('path')
 const Content = require(join(__dirname,'..','model','contentModel.js'))
 
+const nowTime = ()=>{
+    const date = new Date();
+   return `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
+
+}
+console.log(nowTime())
+
 
 router.get('/', (req, res) => {
     if(!res.locals.user){
@@ -45,7 +52,7 @@ router.post('/',(req,res)=>{
         if(file.size>1024*1024*5){
             return res.json({
                 case:false,
-                message:'File is bigger than 5 MB, Please use smaller than 5MB images'
+                message:'File is bigger than 5 MB, Please use smaller images than 5MB images'
             })
         }
 
@@ -53,14 +60,14 @@ router.post('/',(req,res)=>{
         if(file.mimetype=='image/jpeg' || file.mimetype=='image/png' || file.mimetype=='image/jpg'){
             
             //create unique name
-            const extentiton = file.mimetype.split('/')[1] 
+            const extentiton = file.mimetype.split('/')[1] //get extension
             const uniqueName=`${Date.now()}-${Math.round(Math.random()*1E9)}.${extentiton}`
             
             const pathName=join(__dirname,'..','public','img','content',uniqueName)
             file.mv(pathName,(err)=>{
                 if(err!=undefined){
                     return res.json({
-                        case:true,
+                        case:false,
                         message:`file couldn't add`
                     })
                 }
@@ -69,28 +76,22 @@ router.post('/',(req,res)=>{
                         title,
                         content,
                         name,
-                        'path':pathName
+                        'path':`/img/content/${uniqueName}`,         //can not access root directory on server
+                        date:nowTime()
                     })
                     db.save().then(()=>{
                         return res.json({
-                            case:'true',
+                            case:true,
                             message:'saved successfully'
                         })
-                    })
-
-
-                    
+                    })     
                 }
             })
-
-
-          
-
         }
         else{
             return res.json({
                 case:false,
-                message:'Please use png, jpg or jpeg imagines '
+                message:'Please use png, jpg or jpeg images '
             })
         }       
 
