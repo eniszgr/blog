@@ -49,6 +49,7 @@ const loginPage= require(path.join(__dirname,'router','loginPage.js'))
 const registerPage= require(path.join(__dirname,'router','registerPage.js'))
 const errorPage= require(path.join(__dirname,'router','errorPage.js'))
 const logoutPage= require(path.join(__dirname,'router','logoutPage.js'))
+const singlePage= require(path.join(__dirname,'router','singlePage.js'))
 
 //control identify
 app.use('/',(req,res,next)=>{
@@ -72,6 +73,7 @@ app.use('/add', addPage);        // Ekleme sayfası için
 app.use('/login', loginPage);    // Giriş sayfası için
 app.use('/register', registerPage); // Kayıt sayfası için
 app.use('/logout', logoutPage); 
+app.use('/single', singlePage); 
 
 app.use('*',(req,res,next)=>{
     res.render('site/error')

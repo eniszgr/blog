@@ -5,7 +5,7 @@
         <div class="posts">
             
 {{#each allData}}
-            <div class="post target">
+            <a href="/single" class="post target">
                 <h1>{{title}}</h1>
                 <img src={{path}} alt="">
                 <p>{{content}}
@@ -14,7 +14,7 @@
                     <span>{{name}}</span>
                     <span>{{date}}</span>
                 </div>
-            </div>
+            </a>
 {{/each}}
 
         </div>
