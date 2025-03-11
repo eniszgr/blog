@@ -3,6 +3,7 @@ const path = require('path');
 const router = express.Router();
 const { join } = require('path');
 const Content = require(join(__dirname, '..', 'model', 'contentModel.js'));
+const fs = require('fs'); // file system
 
 router.get('/:id', async (req, res) => {
   try {
@@ -24,6 +25,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
+    //authorization check
     if (!res.locals.user) {
       return res.json({
         case: false,
@@ -34,32 +36,76 @@ router.post('/', async (req, res) => {
     const { title, content, name, _id } = req.body;
     const file = req.files ? req.files.file : null;
 
-    if (!title || !content || !name || !_id || !file) {
+    if (!title || !content || !name || !_id) {
       return res.json({
         case: false,
         message: "data couldn't be sent",
       });
     }
 
-    // Create unique name
-    const extension = file.mimetype.split('/')[1]; // Get extension
-    const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}.${extension}`;
-    const pathName = join(__dirname, '..', 'public', 'img', 'content', uniqueName);
+    const existingContent = await Content.findById(_id).exec();
+    if (!existingContent) {
+      return res.json({
+        case: false,
+        message: "content couldn't be found",
+      });
+    }
 
-    file.mv(pathName, async (err) => {
-      if (err) {
-        return res.json({
-          case: false,
-          message: "file couldn't be uploaded",
-        });
-      }
+    let imagePath = existingContent.path;
+
+    if (file) {
+      // Delete the old image file
+      const oldImagePath = path.join(__dirname, '..', 'public', existingContent.path);
+      fs.unlink(oldImagePath, (err) => {
+        if (err) {
+          console.log('Error deleting old image:', err);
+        }
+      });
+
+      // Create unique name for the new image
+      const extension = file.mimetype.split('/')[1]; // Get extension
+      const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}.${extension}`;
+      const pathName = join(__dirname, '..', 'public', 'img', 'content', uniqueName);
+
+      file.mv(pathName, async (err) => {
+        if (err) {
+          return res.json({
+            case: false,
+            message: "file couldn't be uploaded",
+          });
+        }
+        imagePath = `/img/content/${uniqueName}`;
+
+        try {
+          await Content.findByIdAndUpdate(_id, {
+            $set: {
+              title,
+              content,
+              name,
+              path: imagePath,
+            },
+          });
+
+          return res.json({
+            case: true,
+            message: 'successfully updated',
+          });
+        } catch (error) {
+          console.log(error);
+          return res.json({
+            case: false,
+            message: 'unexpected error',
+          });
+        }
+      });
+    } else {    //file is not exist
       try {
         await Content.findByIdAndUpdate(_id, {
           $set: {
             title,
             content,
             name,
-            path: `/img/content/${uniqueName}`,
+            path: imagePath,
           },
         });
 
@@ -74,7 +120,7 @@ router.post('/', async (req, res) => {
           message: 'unexpected error',
         });
       }
-    });
+    }
   } catch (error) {
     console.log(error);
     return res.json({

@@ -15,8 +15,7 @@ router.get('/:id', async(req,res)=>{
         }
             
         const data = await Content.findById(id).exec()
-        console.log(data)
-        console.log(id)
+
         return res.render('site/single',{
             singleData:data.toJSON()
         }) 
@@ -36,9 +35,9 @@ router.delete('/:id', async(req,res)=>{
         let {id} = req.params
         const data = await Content.findById(id).exec()
         let fileName = data.path
-        console.log(fileName)
+        
         let pathName = join(__dirname,'..','public',fileName)
-        console.log(pathName)
+      
         
         Content.findByIdAndDelete(id).then(()=>{
             fs.unlink(pathName,(error)=>{
