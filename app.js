@@ -50,11 +50,13 @@ const registerPage= require(path.join(__dirname,'router','registerPage.js'))
 const errorPage= require(path.join(__dirname,'router','errorPage.js'))
 const logoutPage= require(path.join(__dirname,'router','logoutPage.js'))
 const singlePage= require(path.join(__dirname,'router','singlePage.js'))
+const editPage= require(path.join(__dirname,'router','editPage.js'))
+
 
 //control identify
 app.use('/',(req,res,next)=>{
     const{userID}=req.session;
-    req.session.userID = '67b7492f2ee1c15c11f0507e';
+    //req.session.userID = '67b7492f2ee1c15c11f0507e';
     if(userID){
         res.locals.user=true
     }else{
@@ -74,6 +76,7 @@ app.use('/login', loginPage);    // Giriş sayfası için
 app.use('/register', registerPage); // Kayıt sayfası için
 app.use('/logout', logoutPage); 
 app.use('/single', singlePage); 
+app.use('/edit', editPage); 
 
 app.use('*',(req,res,next)=>{
     res.render('site/error')

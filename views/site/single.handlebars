@@ -2,14 +2,16 @@
     <div class="wrapper">
         <div class="singleHeader">
             <h2>{{singleData.title}}</h2>
-            <div class="buttons">
-                <button>
-                    <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-                <button id="deleteButton">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </div> 
+            {{#if user}}
+                <div class="buttons">
+                    <button id="editButton">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button id="deleteButton">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div> 
+            {{/if}}
         </div> 
         <img src="{{singleData.path}}" alt="Image" class="singleImage">
         <p>{{singleData.content}}</p>  
@@ -22,10 +24,12 @@
 </div>
 <script>
     const deleteButton = document.getElementById('deleteButton');
+    const editButton = document.getElementById('editButton');
+    
     deleteButton.addEventListener('click',()=>{
         let url = window.location.href;
         url = url.split('single/')[1];
-        console.log(url);
+       
         fetch(`/single/${url}`,{
             method: 'delete'
         }).then(res=>res.json())
@@ -37,6 +41,12 @@
            }
         
         })
+    })
+    editButton.addEventListener('click',()=>{
+        let url = window.location.href;
+        let id = url.split('single/')[1];
+     
+        window.location.href=`/edit/${id}`;  // redirect to edit page
     })
     
     

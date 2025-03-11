@@ -1,0 +1,55 @@
+<div class="addMessage">
+    <p id="addMessage"></p>
+</div>
+
+<div class="add">
+        <form id="editForm">
+            <div class="text">
+                <input name="title" value="{{data.title}}"type="text" placeholder="Your Title *" required>
+                <textarea name="content" placeholder="Your Content * " required>{{data.content}}</textarea>
+                <input name="name" value="{{data.name}}" type="text"placeholder="Your Name *">
+                <input type="password" value="{{data._id}}" name ="_id" style="display: none;"> 
+            </div>
+            <div class="button">
+                <button><i class="fa-solid fa-plus"></i></button>
+                <label for="file"><i class="fa-solid fa-image"></i></label>
+                <input name="file" type="file" id="file" style="display: none;">
+            </div>
+        </form>
+    </div>
+
+<script>
+    const add = document.getElementById('editForm')
+    const addMessage = document.getElementById('addMessage')
+    
+    const clearMessageForadd=()=>{
+        setTimeout(()=>{
+            addMessage.innerHTML=''
+        },1000*4)
+    }
+
+
+    add.addEventListener('submit',(e)=>{
+        e.preventDefault()
+
+        const formData= new FormData(e.target)
+       
+        fetch('/edit',{
+            method:'post',
+            body:formData
+        }).then(response=>response.json())
+        .then(res=>{
+            if(res.case){
+                addMessage.style.color='#A5DD9B';
+                addMessage.innerHTML=res.message
+            }
+            else{
+                addMessage.style.color='#FFCAD4';
+                addMessage.innerHTML=res.message
+            }
+            clearMessageForadd()
+        })
+        
+    })
+</script>
+
