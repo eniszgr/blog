@@ -56,7 +56,7 @@ const editPage= require(path.join(__dirname,'router','editPage.js'))
 //control identify
 app.use('/',(req,res,next)=>{
     const{userID}=req.session;
-    //req.session.userID = '67b7492f2ee1c15c11f0507e';
+    //!req.session.userID = '';  for test
     if(userID){
         res.locals.user=true
     }else{

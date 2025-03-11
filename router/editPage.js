@@ -51,9 +51,10 @@ router.post('/', async (req, res) => {
       });
     }
 
-    let imagePath = existingContent.path;
+    let imagePath = existingContent.path; //img path already exist
 
-    if (file) {
+    // If there is a new file or not
+    if (file) {//for new file
       // Delete the old image file
       const oldImagePath = path.join(__dirname, '..', 'public', existingContent.path);
       fs.unlink(oldImagePath, (err) => {
@@ -64,10 +65,10 @@ router.post('/', async (req, res) => {
 
       // Create unique name for the new image
       const extension = file.mimetype.split('/')[1]; // Get extension
-      const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}.${extension}`;
+      const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}.${extension}`;//unique name
       const pathName = join(__dirname, '..', 'public', 'img', 'content', uniqueName);
 
-      file.mv(pathName, async (err) => {
+      file.mv(pathName, async (err) => {    //to save the file to the pathName adress
         if (err) {
           return res.json({
             case: false,
@@ -98,14 +99,14 @@ router.post('/', async (req, res) => {
           });
         }
       });
-    } else {    //file is not exist
+    } else {    //if file is not exist
       try {
         await Content.findByIdAndUpdate(_id, {
           $set: {
             title,
             content,
             name,
-            path: imagePath,
+            path: imagePath, //old path
           },
         });
 

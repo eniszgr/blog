@@ -51,17 +51,15 @@ router.delete('/:id', async(req,res)=>{
                     case:true,
                     message:'delete was successful'
                 })
-            })
-            
-        }).catch((error)=>{
+            })  
+        })
+        .catch((error)=>{
             console.log(error)
             return res.json({
                 case:false,
                 message:'delete was unsuccessful'
             })
         })
-        
-        
     } catch (error) {
      console.log(error)
      return res.redirect('/error') 
